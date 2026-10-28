@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>búsquedas en grafo</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#05050d">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Grafo">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="card"><div class="head">
+      <h1>Tipos de Busquedas</h1>
+      <button id="instalar" class="mini" type="button" hidden>Descargar</button>
+    </div>
+    <p id="ayuda-ios" class="hint" hidden>En iPhone: toca el botón Compartir y elige “Agregar a pantalla de inicio”.</p><svg id="g" viewBox="0 0 690 660" role="img" aria-label="Grafo con 28 nodos"></svg></div>
+  <div class="card">
+    <h1>Búsquedas en el grafo</h1>
+    <label for="tipo">Tipo de búsqueda</label>
+    <select id="tipo"><option value="1">Profunda (DFS)</option><option value="2">A lo ancho (BFS)</option><option value="3">Heurística (A*)</option><option value="4">Escalada</option><option value="5">Escalada profunda</option><option value="6">Mejor primero (Best-First)</option></select>
+    <label for="sent">Sentido</label>
+    <select id="sent"><option value="1">Horario</option><option value="2">Antihorario</option></select>
+    <div class="row">
+      <div><label for="ini">Nodo inicial (1-28)</label><input id="ini" type="number" min="1" max="28" value="11"></div>
+      <div><label for="fin">Nodo final (1-28)</label><input id="fin" type="number" min="1" max="28" value="1"></div>
+    </div>
+    <label for="dly">Retraso por paso: <span id="dv">700</span> ms</label>
+    <input id="dly" type="range" min="100" max="2000" step="100" value="700">
+
+    <div class="btns"><button id="go">Buscar</button><button id="stop" class="sec" disabled>Detener</button></div>
+    <div class="leg">
+      <span><i style="background:var(--cur)"></i>actual</span><span><i style="background:var(--vis)"></i>visitado</span>
+      <span><i style="background:var(--back)"></i>retroceso</span><span><i style="background:var(--q)"></i>en cola / evaluado</span>
+      <span><i style="background:var(--path)"></i>ruta final</span>
+      <span>h(n) = distancia en línea recta al nodo final</span>
+    </div>
+    <div class="out" id="out" aria-live="polite"></div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

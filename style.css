@@ -1,0 +1,442 @@
+
+/* =========================================================
+   VISUALIZADOR DE GRAFO · estilo grafito y acero
+   Paleta neutra, oscura y minimalista
+   ========================================================= */
+
+/* ---------- 1. TOKENS ---------- */
+:root {
+  color-scheme: dark;
+
+  /* superficies */
+  --bg: #111315;
+  --panel: #1B1E22;
+  --node: #292E34;
+  --bd: rgba(145, 157, 171, .22);
+
+  /* texto */
+  --ink: #E5E8EC;
+  --mut: #9AA4AF;
+
+  /* acentos neutros */
+  --pink:   #A7B0BB;
+  --cyan:   #02d9ff;
+  --yellow: #C2CBD4;
+  --green:  #B7C0CA;
+
+  /* estados del grafo */
+  --line: rgba(150, 163, 178, .35);
+  --cur:  #00eeff;
+  --vis:  #8293A5;
+  --back: #626D79;
+  --q:    #AAB8C6;
+  --path: #ff00ea;
+
+  /* tipografía */
+  --font-title: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: Consolas, "Courier New", monospace;
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ---------- 2. BASE ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.45;
+
+  background:
+    radial-gradient(
+      circle 520px at 8% 4%,
+      rgba(115, 127, 140, .08),
+      transparent 70%
+    ),
+    radial-gradient(
+      circle 560px at 96% 18%,
+      rgba(82, 96, 111, .08),
+      transparent 70%
+    ),
+    var(--bg);
+
+  background-attachment: fixed;
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-family: var(--font-title);
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+
+  color: #DCE2E8;
+  background: none;
+  -webkit-text-fill-color: #DCE2E8;
+  filter: none;
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- 3. LAYOUT ---------- */
+.wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- 4. TARJETAS ---------- */
+.card {
+  padding: 18px;
+  background: rgba(27, 30, 34, .94);
+  border: 1px solid var(--bd);
+  border-radius: 16px;
+
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, .20),
+    inset 0 1px 0 rgba(255, 255, 255, .025);
+}
+
+/* ---------- 5. FORMULARIO ---------- */
+label {
+  display: block;
+  margin: 12px 0 4px;
+  font-size: 13px;
+  color: var(--mut);
+}
+
+select,
+input[type=number] {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--ink);
+  background: #15181B;
+  border: 1px solid #3A4149;
+  border-bottom: 2px solid #697989;
+  border-radius: 9px;
+  box-shadow: none;
+}
+
+select option {
+  background: #1B1E22;
+  color: var(--ink);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+input[type=range] {
+  width: 100%;
+  accent-color: var(--cyan);
+}
+
+/* ---------- 6. BOTONES ---------- */
+.btns {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+button {
+  flex: 1;
+  padding: 12px;
+  font: inherit;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: #F0F2F5;
+  cursor: pointer;
+
+  background: linear-gradient(
+    180deg,
+    #424A53 0%,
+    #30363D 100%
+  );
+
+  border: 1px solid #505A65;
+  border-radius: 10px;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .06),
+    0 3px 8px rgba(0, 0, 0, .18);
+
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
+}
+
+button:hover:not(:disabled) {
+  background: linear-gradient(
+    180deg,
+    #515B66 0%,
+    #39414A 100%
+  );
+  border-color: #718091;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+button.sec {
+  color: #C0CBD6;
+  background: #20252A;
+  border: 1px solid #4B5662;
+  box-shadow: none;
+}
+
+button.sec:hover:not(:disabled) {
+  background: #2A3138;
+  border-color: #8293A5;
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 2px solid #AAB8C6;
+  outline-offset: 3px;
+}
+
+/* ---------- 7. SALIDA Y LEYENDA ---------- */
+.out {
+  margin-top: 14px;
+  font-size: 13px;
+  word-break: break-word;
+}
+
+.out b {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+  color: #B9C5D1;
+}
+
+.out span {
+  font-family: var(--font-mono);
+  color: var(--ink);
+}
+
+.leg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--mut);
+}
+
+.leg i {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  margin-right: 4px;
+  vertical-align: -1px;
+  border-radius: 50%;
+}
+
+/* ---------- 8. GRAFO ---------- */
+
+/* aristas */
+.edge {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 2;
+  transition: stroke .25s, stroke-width .25s;
+}
+
+.edge.q {
+  stroke: var(--q);
+  stroke-width: 3;
+}
+
+.edge.t {
+  stroke: var(--vis);
+  stroke-width: 3.5;
+}
+
+.edge.b {
+  stroke: var(--back);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 4;
+}
+
+.edge.p {
+  stroke: var(--path);
+  stroke-width: 5;
+}
+
+/* pesos */
+.w {
+  font-size: 10px;
+  fill: #C1C9D2;
+  paint-order: stroke;
+  stroke: var(--panel);
+  stroke-width: 3px;
+}
+
+/* nodos */
+.n circle {
+  fill: var(--node);
+  stroke: #647180;
+  stroke-width: 2;
+  filter: none;
+  transition: fill .25s, stroke .25s;
+}
+
+.n text {
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--ink);
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+
+/* nodo en cola */
+.n.q circle {
+  stroke: var(--q);
+  stroke-width: 3;
+}
+
+.n.q text {
+  fill: var(--ink);
+}
+
+/* nodo visitado */
+.n.v circle {
+  fill: #586777;
+  stroke: #8293A5;
+}
+
+.n.v text {
+  fill: #FFFFFF;
+}
+
+/* nodo de retroceso */
+.n.k circle {
+  fill: #454D56;
+  stroke: #687481;
+  filter: none;
+}
+
+.n.k text {
+  fill: #FFFFFF;
+}
+
+/* nodo actual */
+.n.c circle {
+  fill: var(--cur);
+  stroke: #E0E5EA;
+  filter: none;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulso 1s ease-in-out infinite;
+}
+
+.n.c text {
+  fill: #171A1D;
+}
+
+/* ruta final */
+.n.p circle {
+  fill: #8997A5;
+  stroke: #C3CDD6;
+  filter: none;
+}
+
+.n.p text {
+  fill: #101316;
+}
+
+/* inicio y fin */
+.n.s circle,
+.n.f circle {
+  stroke: #D4DBE2;
+  stroke-width: 3;
+}
+
+/* ---------- 9. INSTALAR (PWA) ---------- */
+[hidden] {
+  display: none !important;
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+button.mini {
+  flex: none;
+  padding: 6px 14px;
+  font-size: 12px;
+}
+
+.hint {
+  margin: 0 0 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--mut);
+  background: rgba(255, 255, 255, .02);
+  border: 1px dashed #56616D;
+  border-radius: 9px;
+}
+
+/* ---------- 10. MOVIMIENTO ---------- */
+@keyframes pulso {
+  50% {
+    transform: scale(1.10);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edge,
+  .n circle {
+    transition: none;
+  }
+
+  .n.c circle {
+    animation: none;
+  }
+
+  button {
+    transition: none;
+  }
+}
